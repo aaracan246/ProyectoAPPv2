@@ -32,6 +32,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.proyectoapp.components.Header
 import com.example.proyectoapp.components.PhasmoDivider
@@ -138,17 +139,11 @@ fun LoginScreen(navController: NavController, appViewModel: AppViewModel) {
         Button(
             onClick = {
                 if (username == validUsername && password == validPassword) {
-                    if (!isChecked) {
-                        appViewModel.usernameUpdate("")
-                        appViewModel.passwordUpdate("")
-
-                    }
-                    appViewModel.changeErrorValue(false)
-                    navController.navigate(route = AppScreen.ThirdScreen.route)
-
+                        appViewModel.saveLogCredentials()
+                        appViewModel.changeErrorValue(false)
+                        navController.navigate(route = AppScreen.ThirdScreen.route)
                 } else {
-                    appViewModel.usernameUpdate("")
-                    appViewModel.passwordUpdate("")
+                    appViewModel.resetCredentials()
                     appViewModel.changeErrorValue(true)
                 }
             },

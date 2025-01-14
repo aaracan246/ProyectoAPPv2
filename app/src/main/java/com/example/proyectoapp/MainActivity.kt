@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.example.phasmoapp.navigation.AppNavigation
 import com.example.phasmoapp.ui.theme.PokeAppTheme
+import com.example.proyectoapp.datastore.DataStoreManager
 import com.example.proyectoapp.music.MusicService
 import com.example.proyectoapp.viewmodel.AppViewModel
 
@@ -18,8 +19,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             PokeAppTheme {
 
+                val dataStoreManager = DataStoreManager(applicationContext)
                 val navController = rememberNavController()
-                val appViewModel = AppViewModel()
+                val appViewModel = AppViewModel(dataStoreManager)
                 AppNavigation(navController, appViewModel)
 
 

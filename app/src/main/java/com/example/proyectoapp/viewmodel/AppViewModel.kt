@@ -1,12 +1,33 @@
 package com.example.proyectoapp.viewmodel
 
+import androidx.datastore.dataStore
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.proyectoapp.datastore.DataStoreManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class AppViewModel: ViewModel() {
+class AppViewModel(private val dataStoreManager: DataStoreManager): ViewModel() {
 
+
+    init {
+        viewModelScope.launch {
+
+            dataStoreManager.getUserName().collect{ savedUsername ->
+                _username.value = savedUsername.orEmpty()
+                _isChecked.value = savedUsername.isNullOrEmpty()
+            }
+        }
+
+        viewModelScope.launch {
+            dataStoreManager.getUserPassword().collect{ savedPassword ->
+                _password.value = savedPassword.orEmpty()
+            }
+        }
+    }
     private val _username = MutableStateFlow("")
     val username: StateFlow<String> = _username
     private val _password = MutableStateFlow("")
@@ -29,11 +50,11 @@ class AppViewModel: ViewModel() {
         _password.update { newPassword }
     }
 
-    private val _checkRememberUsername = MutableStateFlow(false)
-    val checkRememberUsername: StateFlow<Boolean> = _checkRememberUsername
-
-    private val _checkRememberPass = MutableStateFlow(false)
-    val checkRememberPass: StateFlow<Boolean> = _checkRememberPass
+//    private val _checkRememberUsername = MutableStateFlow(false)
+//    val checkRememberUsername: StateFlow<Boolean> = _checkRememberUsername
+//
+//    private val _checkRememberPass = MutableStateFlow(false)
+//    val checkRememberPass: StateFlow<Boolean> = _checkRememberPass
 
     fun checkRememberMe(){
         _isChecked.value = !_isChecked.value
@@ -41,5 +62,17 @@ class AppViewModel: ViewModel() {
 
     fun changeErrorValue(state: Boolean){
         _isError.value = state
+    }
+
+    fun saveLogCredentials(){
+        viewModelScope.launch {
+            if (_isChecked.value){ dataStoreManager.saveUserData(_username.value, _password.value) }
+            else { dataStoreManager.saveUserData("", "") }
+        }
+    }
+
+    fun resetCredentials() {
+        usernameUpdate("")
+        passwordUpdate("")
     }
 }
