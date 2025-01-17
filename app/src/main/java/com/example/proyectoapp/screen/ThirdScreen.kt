@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.proyectoapp.components.Footer
 import com.example.proyectoapp.components.Header
-import com.example.proyectoapp.components.PhasmoDivider
+import com.example.proyectoapp.components.PokeDivider
 import com.example.proyectoapp.navigation.AppScreen
 import com.example.proyectoapp.R
 
@@ -55,7 +55,7 @@ fun OptionsMenu(navController: NavController) {
 
         Header()
 
-        PhasmoDivider()
+        PokeDivider()
 
         Button(
             onClick = { navController.navigate(route = AppScreen.FourthScreen.route) },

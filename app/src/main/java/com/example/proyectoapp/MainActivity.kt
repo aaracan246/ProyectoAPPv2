@@ -24,9 +24,6 @@ class MainActivity : ComponentActivity() {
                 val appViewModel = AppViewModel(dataStoreManager)
                 AppNavigation(navController, appViewModel)
 
-
-
-
             }
         }
         val musicService = Intent(this, MusicService::class.java)

@@ -13,14 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.proyectoapp.R
 import com.example.proyectoapp.components.Footer
 import com.example.proyectoapp.components.Header
-import com.example.proyectoapp.components.PhasmoDivider
+import com.example.proyectoapp.components.PokeDivider
 
 @Composable
 fun FourthScreen(navController: NavController) {
@@ -36,7 +35,7 @@ fun FourthScreen(navController: NavController) {
 
         Header()
 
-        PhasmoDivider()
+        PokeDivider()
 
         Text(
             text = LoremIpsum(70).values.joinToString(" "),

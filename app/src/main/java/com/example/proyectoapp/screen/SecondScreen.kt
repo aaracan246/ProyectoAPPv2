@@ -32,10 +32,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.proyectoapp.components.Header
-import com.example.proyectoapp.components.PhasmoDivider
+import com.example.proyectoapp.components.PokeDivider
 import com.example.proyectoapp.navigation.AppScreen
 import com.example.proyectoapp.viewmodel.AppViewModel
 import com.example.proyectoapp.R
@@ -72,7 +71,7 @@ fun LoginScreen(navController: NavController, appViewModel: AppViewModel) {
 
         Spacer(modifier = Modifier.padding(16.dp))
 
-        PhasmoDivider()
+        PokeDivider()
 
         if (isError){
             ErrorAuthentication()

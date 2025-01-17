@@ -3,11 +3,13 @@ package com.example.proyectoapp.music
 import android.app.Service
 import android.content.Intent
 import android.media.MediaPlayer
+import android.os.Binder
 import android.os.IBinder
 import com.example.proyectoapp.R
 
-class MusicService: Service() {
+class  MusicService: Service() {
     private lateinit var mediaPlayer: MediaPlayer
+    private val binder = MusicBinder()
 
     override fun onCreate() {
         super.onCreate()
@@ -22,6 +24,10 @@ class MusicService: Service() {
         return START_STICKY // Mantiene el servicio
     }
 
+    fun isMusicPlaying(): Boolean{
+        return mediaPlayer.isPlaying
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.stop()
@@ -30,5 +36,9 @@ class MusicService: Service() {
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
+    }
+
+    inner class MusicBinder: Binder(){
+        fun getService(): MusicService = this@MusicService
     }
 }

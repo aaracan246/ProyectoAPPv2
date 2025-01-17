@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.proyectoapp.R
 
 @Composable
-fun PhasmoDivider(){
+fun PokeDivider(){
     Row(verticalAlignment = Alignment.CenterVertically) {
         HorizontalDivider(modifier = Modifier
             .weight(1f)
